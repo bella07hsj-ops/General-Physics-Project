@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://ubantas00bdq"]
+
+[ext_resource type="Script" uid="uid://bjnxhu8jlpvgv" path="res://SimulationController.gd" id="1_cm0pq"]
+[ext_resource type="Script" uid="uid://chadhs2p5q6uc" path="res://PhysicsConstants.gd" id="2_fos0i"]
+[ext_resource type="Script" uid="uid://dg4ya8f4vqgtm" path="res://CupPendulum.gd" id="3_3dxm6"]
+[ext_resource type="Script" uid="uid://dd8jytwcq2iht" path="res://SpringGun.gd" id="3_lgr22"]
+[ext_resource type="Script" uid="uid://biyoex51w2u5r" path="res://GraphPanel.gd" id="4_lgr22"]
+[ext_resource type="Script" uid="uid://bkcgmb0xnhth6" path="res://Projectile.gd" id="4_trn2v"]
+
+[sub_resource type="Environment" id="Environment_03owx"]
+background_mode = 1
+background_color = Color(0.3491902, 0.36396736, 0.42358288, 1)
+ambient_light_color = Color(0.58383155, 0.58383155, 0.6262097, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_wkp8b"]
+size = Vector3(4.2, 0.07, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20pc6"]
+albedo_color = Color(0.5847179, 0.46254948, 0.3133042, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vvyt"]
+albedo_color = Color(0.79595864, 0.79595864, 0.82665706, 1)
+metallic = 0.95
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c6i3y"]
+material = SubResource("StandardMaterial3D_5vvyt")
+top_radius = 0.016
+bottom_radius = 0.016
+height = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2ibq"]
+albedo_color = Color(0.6651851, 0.85430586, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j4qnp"]
+material = SubResource("StandardMaterial3D_c2ibq")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpfj3"]
+albedo_color = Color(0.7014107, 0.7014107, 0.735357, 1)
+metallic = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_sc1dx"]
+material = SubResource("StandardMaterial3D_fpfj3")
+size = Vector3(0.03, 0.4, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjvhd"]
+albedo_color = Color(0.9058309, 0.8823829, 0.76737565, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5tuhn"]
+material = SubResource("StandardMaterial3D_kjvhd")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gh4u"]
+albedo_color = Color(0.9058309, 0.8823829, 0.76737565, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_devvj"]
+material = SubResource("StandardMaterial3D_2gh4u")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3b0ty"]
+albedo_color = Color(0.9063318, 0.8808251, 0.76737565, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bg4s2"]
+material = SubResource("StandardMaterial3D_3b0ty")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhcpw"]
+albedo_color = Color(0.827222, 0.827222, 0.46135613, 1)
+metallic = 0.55
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_mxvw5"]
+material = SubResource("StandardMaterial3D_hhcpw")
+size = Vector3(0.14, 0.1, 0.14)
+
+[node name="Main" type="Node3D" unique_id=889796493]
+
+[node name="SimulationController" type="Node" parent="." unique_id=316208870]
+script = ExtResource("1_cm0pq")
+
+[node name="PhysicsConstants" type="Node" parent="." unique_id=84858098]
+script = ExtResource("2_fos0i")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=128482645]
+environment = SubResource("Environment_03owx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=315378232]
+transform = Transform3D(0.70710677, 0.579228, -0.4055798, 0, 0.57357645, 0.81915206, 0.70710677, -0.579228, 0.4055798, 0, 4, 2)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1332311278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0.5)
+light_energy = 0.5
+omni_range = 7.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=927110887]
+transform = Transform3D(1, 0, 0, 0, 0.95105654, 0.309017, 0, -0.309017, 0.95105654, 0, 1.8, 3.5)
+fov = 52.0
+
+[node name="Table" type="MeshInstance3D" parent="." unique_id=1178949110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.37, 0)
+mesh = SubResource("BoxMesh_wkp8b")
+surface_material_override/0 = SubResource("StandardMaterial3D_20pc6")
+
+[node name="SpringGun" type="Node3D" parent="." unique_id=1290164710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0.85, 0)
+script = ExtResource("3_lgr22")
+
+[node name="GunBody" type="MeshInstance3D" parent="SpringGun" unique_id=1763657242]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.24, 0, 0)
+mesh = SubResource("CylinderMesh_c6i3y")
+
+[node name="DriverMesh" type="MeshInstance3D" parent="SpringGun" unique_id=1060577614]
+
+[node name="Projectile" type="Node3D" parent="." unique_id=245095560]
+visible = false
+script = ExtResource("4_trn2v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Projectile" unique_id=1538485689]
+mesh = SubResource("SphereMesh_j4qnp")
+
+[node name="CupPendulum" type="Node3D" parent="." unique_id=90520270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.62, 0)
+script = ExtResource("3_3dxm6")
+
+[node name="Support" type="MeshInstance3D" parent="CupPendulum" unique_id=1853332941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_sc1dx")
+
+[node name="Pivot" type="Node3D" parent="CupPendulum" unique_id=984666296]
+
+[node name="Spring1" type="MeshInstance3D" parent="CupPendulum/Pivot" unique_id=1646025968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.055, -0.175, -0.055)
+mesh = SubResource("CylinderMesh_5tuhn")
+
+[node name="Spring2" type="MeshInstance3D" parent="CupPendulum/Pivot" unique_id=1921475945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.055, -0.175, -0.55)
+mesh = SubResource("CylinderMesh_devvj")
+
+[node name="Spring3" type="MeshInstance3D" parent="CupPendulum/Pivot" unique_id=1912528011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.175, 0.065)
+mesh = SubResource("CylinderMesh_bg4s2")
+
+[node name="Cup" type="Node3D" parent="CupPendulum/Pivot" unique_id=766711464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CupPendulum/Pivot/Cup" unique_id=1786721291]
+mesh = SubResource("BoxMesh_mxvw5")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1400429604]
+
+[node name="StatusBar" type="PanelContainer" parent="UI" unique_id=1073408454]
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset_ratio = Vector2(1280, 34)
+
+[node name="LabelState" type="Label" parent="UI/StatusBar" unique_id=329605234]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "초기화 중..."
+
+[node name="ControlPanel" type="PanelContainer" parent="UI" unique_id=785263582]
+offset_left = 8.0
+offset_top = 42.0
+offset_right = 304.0
+offset_bottom = 323.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/ControlPanel" unique_id=1159230953]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="UI/ControlPanel/VBox" unique_id=2112843599]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Parameters"
+
+[node name="Sep1" type="HSeparator" parent="UI/ControlPanel/VBox" unique_id=303272029]
+layout_mode = 2
+
+[node name="MassSection" type="VBoxContainer" parent="UI/ControlPanel/VBox" unique_id=1277809271]
+layout_mode = 2
+
+[node name="LabelMb" type="Label" parent="UI/ControlPanel/VBox/MassSection" unique_id=1851037866]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Mass of Projectile mb: 63.6g"
+
+[node name="SliderMb" type="HSlider" parent="UI/ControlPanel/VBox/MassSection" unique_id=1570292943]
+custom_minimum_size = Vector2(276, 28)
+layout_mode = 2
+min_value = 4.7
+max_value = 300.0
+step = 0.1
+value = 63.6
+
+[node name="HintMb" type="Label" parent="UI/ControlPanel/VBox/MassSection" unique_id=757022048]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "wooden 4.7g ◀──────────────▶ 300g"
+
+[node name="Sep2" type="HSeparator" parent="UI/ControlPanel/VBox/MassSection" unique_id=2124394508]
+layout_mode = 2
+
+[node name="LabelMc" type="Label" parent="UI/ControlPanel/VBox/MassSection" unique_id=701485998]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Effective mass of a pendulum mc: 99.7g"
+
+[node name="SliderMc" type="HSlider" parent="UI/ControlPanel/VBox/MassSection" unique_id=127765249]
+custom_minimum_size = Vector2(276, 28)
+layout_mode = 2
+min_value = 20.0
+max_value = 200.0
+step = 0.1
+value = 99.7
+
+[node name="HintMc" type="Label" parent="UI/ControlPanel/VBox/MassSection" unique_id=971359798]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "29g ◀──────────────────▶ 200g"
+
+[node name="Sep3" type="HSeparator" parent="UI/ControlPanel/VBox" unique_id=312888724]
+layout_mode = 2
+
+[node name="FixedParamsLabel" type="Label" parent="UI/ControlPanel/VBox" unique_id=1699432444]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Fixed parameters"
+
+[node name="FixedParamsText" type="Label" parent="UI/ControlPanel/VBox" unique_id=147810839]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "k = 2730 N/m | Δx = 2.3 cm↵fd = 0.4 N | md = 41 g | g = 9.8 N/kg"
+
+[node name="Sep4" type="HSeparator" parent="UI/ControlPanel/VBox" unique_id=31896428]
+layout_mode = 2
+
+[node name="BtnFire" type="Button" parent="UI/ControlPanel/VBox" unique_id=2105406636]
+custom_minimum_size = Vector2(276, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Fire"
+
+[node name="BtnReset" type="Button" parent="UI/ControlPanel/VBox" unique_id=1948899442]
+custom_minimum_size = Vector2(276, 30)
+layout_mode = 2
+text = "Reset
+"
+
+[node name="ReseultPanel" type="PanelContainer" parent="UI" unique_id=352854153]
+offset_left = 8.0
+offset_top = 390.0
+offset_right = 9.0
+offset_bottom = 417.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/ReseultPanel" unique_id=1676407628]
+layout_mode = 2
+
+[node name="ResultTitle" type="Label" parent="UI/ReseultPanel/VBox" unique_id=1906257172]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Result"
+
+[node name="LabelResult" type="RichTextLabel" parent="UI/ReseultPanel/VBox" unique_id=1842154741]
+custom_minimum_size = Vector2(276, 160)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Control the slider"
+fit_content = true
+
+[node name="GraphPanel" type="Control" parent="UI" unique_id=1391383691]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 312.0
+offset_top = 42.0
+offset_right = 1272.0
+offset_bottom = 712.0
+script = ExtResource("4_lgr22")
